@@ -8,7 +8,6 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // Enable CORS credentials for cross-device requests
 });
 
 api.interceptors.request.use(
