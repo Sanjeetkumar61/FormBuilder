@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 const API_BASE_URL =
@@ -9,6 +8,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Enable CORS credentials for cross-device requests
 });
 
 api.interceptors.request.use(
@@ -46,6 +46,10 @@ export const adminLogin = async (email, password) => {
   }
 
   return response;
+};
+
+export const getAdminData = async () => {
+  return await api.get("/auth/profile");
 };
 
 export const createForm = async (formData) => {

@@ -19,12 +19,12 @@ export default function AdminLogin() {
 
     try {
       const response = await api.post("/auth/login", { email, password });
-      
+
       if (response.data.success) {
         // Store token in localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("adminData", JSON.stringify(response.data.admin));
-        
+
         setSuccess("Login successful! Redirecting...");
         setTimeout(() => {
           navigate("/");
@@ -103,8 +103,6 @@ export default function AdminLogin() {
             "Login"
           )}
         </button>
-
-        
       </form>
     </div>
   );

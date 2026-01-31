@@ -10,6 +10,8 @@ import AdminLayout from "../components/layout/AdminLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Routes>
@@ -29,11 +31,13 @@ export default function AppRoutes() {
           <Route path="/user-dashboard" element={<UserDashboard />} />
         </Route>
 
-        {/* Public form access */}
         <Route path="/form/:id" element={<UserFormFill />} />
 
-        {/* Redirect to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/" : "/login"} replace />}
+        />
       </Routes>
     </BrowserRouter>
   );

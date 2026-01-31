@@ -16,6 +16,7 @@ export const adminLogin = async (req, res) => {
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+    const ADMIN_NAME = process.env.ADMIN_NAME || "Admin User";
 
     if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
       return res.status(500).json({
@@ -35,6 +36,7 @@ export const adminLogin = async (req, res) => {
       {
         role: "admin",
         email: ADMIN_EMAIL,
+        name: ADMIN_NAME,
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
@@ -46,6 +48,7 @@ export const adminLogin = async (req, res) => {
       token,
       admin: {
         email: ADMIN_EMAIL,
+        name: ADMIN_NAME,
         role: "admin",
       },
     });
@@ -53,6 +56,28 @@ export const adminLogin = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Login failed",
+    });
+  }
+};
+
+// Get Admin Profile
+export const getAdminProfile = async (req, res) => {
+  try {
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+    const ADMIN_NAME = process.env.ADMIN_NAME || "Admin User";
+
+    res.status(200).json({
+      success: true,
+      admin: {
+        email: ADMIN_EMAIL,
+        name: ADMIN_NAME,
+        role: "admin",
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch profile",
     });
   }
 };

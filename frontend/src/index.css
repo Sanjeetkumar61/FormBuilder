@@ -1,4 +1,4 @@
- @import "tailwindcss";
+@import "tailwindcss";
 
 body {
   @apply bg-slate-100 text-slate-800;
@@ -12,3 +12,4 @@ body {
   background: #cbd5e1;
   border-radius: 10px;
 }
+
