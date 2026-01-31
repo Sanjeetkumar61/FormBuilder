@@ -13,7 +13,29 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173", // local frontend (Vite)
+  "http://localhost:3000", // optional
+  "https://form-builder-frontend-ashen.vercel.app", // Vercel frontend
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow server-to-server / postman
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+
 app.use(express.json());
 
 
@@ -26,7 +48,10 @@ app.use("/api/responses", responseRoutes);
 
 
 app.get("/api/health", (req, res) => {
-  res.json({ success: true, message: "Server OK" });
+  res.status(200).json({
+    success: true,
+    message: "Server OK",
+  });
 });
 
 
@@ -34,15 +59,19 @@ app.use(errorHandler);
 
 
 app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
 });
 
 
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () =>
-    console.log(`Server running on port ${PORT}`)
-  );
+const PORT = process.env.PORT || 5000;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 }
 
 
