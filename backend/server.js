@@ -13,40 +13,10 @@ dotenv.config();
 const app = express();
 
 
-const allowedOrigins = [
-  "http://localhost:5173", // local frontend (Vite)
-  "http://localhost:3000", // optional
-  "https://form-builder-frontend-ashen.vercel.app", // Vercel frontend
-];
-
+// CORS configuration - allow all Vercel and localhost origins
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow server-to-server / postman / direct API calls
-      if (!origin) return callback(null, true);
-
-      // Allow requests from configured origins
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      // Allow localhost in any case
-      if (origin.includes("localhost")) {
-        return callback(null, true);
-      }
-
-      // Allow any Vercel frontend URLs
-      if (origin.includes("vercel.app")) {
-        return callback(null, true);
-      }
-
-      // In production, allow all origins (safe due to JWT authentication)
-      if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: true,  // Allow all origins - safe because we use JWT authentication
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
