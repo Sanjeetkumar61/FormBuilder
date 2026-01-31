@@ -21,18 +21,27 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: function (origin, callback) {
       // allow server-to-server / postman / direct API calls
       if (!origin) return callback(null, true);
 
-      // Allow requests from localhost and configured Vercel URL
-      if (allowedOrigins.includes(origin) || origin.includes("localhost")) {
+      // Allow requests from configured origins
+      if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      // In production, also allow any origin to support cross-device access
-      // This is safe since authentication is protected by JWT tokens
-      if (process.env.NODE_ENV === "production") {
+      // Allow localhost in any case
+      if (origin.includes("localhost")) {
+        return callback(null, true);
+      }
+
+      // Allow any Vercel frontend URLs
+      if (origin.includes("vercel.app")) {
+        return callback(null, true);
+      }
+
+      // In production, allow all origins (safe due to JWT authentication)
+      if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
         return callback(null, true);
       }
 
