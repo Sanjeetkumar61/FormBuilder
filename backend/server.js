@@ -17,18 +17,28 @@ const app = express();
 connectDB();
 
 /* =========================
-   CORS (VERCEL SAFE)
+   CORS (VERCEL + RENDER SAFE)
 ========================= */
 app.use(
    cors({
-      origin: "https://form-builder-frontend-ashen.vercel.app",
+      origin: [
+         "https://form-builder-frontend-ashen.vercel.app",
+         "http://localhost:5173",
+         "http://localhost:3000",
+      ],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
    })
 );
 
-// ❌ credentials true HATA DIYA (important)
 app.use(express.json());
+
+/* =========================
+   ROOT ROUTE (FIXED)
+========================= */
+app.get("/", (req, res) => {
+   res.send("API is running...");
+});
 
 /* =========================
    ROUTES
@@ -45,7 +55,7 @@ app.get("/api/health", (req, res) => {
 });
 
 /* =========================
-   SERVER
+   SERVER (RENDER)
 ========================= */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
