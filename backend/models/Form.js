@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// Field schema for form fields
+
 const fieldSchema = new mongoose.Schema(
   {
     id: {

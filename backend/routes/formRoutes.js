@@ -11,14 +11,14 @@ import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Protected routes (require admin authentication)
+
 router.post("/", authMiddleware, createForm);
-router.get("/admin/my-forms", authMiddleware, getAllForms); // Admin's forms only
+router.get("/admin/my-forms", authMiddleware, getAllForms);
 router.put("/:id", authMiddleware, updateForm);
 router.delete("/:id", authMiddleware, deleteForm);
 
-// Public routes (no authentication required)
-router.get("/public/available", getAllAvailableForms); // All available forms for users
-router.get("/:id", getFormById); // Public access to single form
+
+router.get("/public/available", getAllAvailableForms);
+router.get("/:id", getFormById);
 
 export default router;

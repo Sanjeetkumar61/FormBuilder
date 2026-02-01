@@ -1,6 +1,6 @@
 import Form from "../models/Form.js";
 
-// Create new form
+
 export const createForm = async (req, res) => {
   try {
     const { title, fields } = req.body;
@@ -34,7 +34,7 @@ export const createForm = async (req, res) => {
   }
 };
 
-// Get all forms for admin
+
 export const getAllForms = async (req, res) => {
   try {
     const adminId = req.admin.id;
@@ -55,7 +55,7 @@ export const getAllForms = async (req, res) => {
   }
 };
 
-// Get all available forms for users (public)
+
 export const getAllAvailableForms = async (req, res) => {
   try {
     const forms = await Form.find({ isActive: true }).sort({
@@ -74,7 +74,7 @@ export const getAllAvailableForms = async (req, res) => {
   }
 };
 
-// Get single form by ID
+
 export const getFormById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -100,7 +100,7 @@ export const getFormById = async (req, res) => {
   }
 };
 
-// Update form
+
 export const updateForm = async (req, res) => {
   try {
     const { id } = req.params;
@@ -116,7 +116,7 @@ export const updateForm = async (req, res) => {
       });
     }
 
-    // Check if admin owns the form
+
     if (form.adminId.toString() !== adminId) {
       return res.status(403).json({
         success: false,
@@ -142,7 +142,7 @@ export const updateForm = async (req, res) => {
   }
 };
 
-// Delete form
+
 export const deleteForm = async (req, res) => {
   try {
     const { id } = req.params;
@@ -157,7 +157,7 @@ export const deleteForm = async (req, res) => {
       });
     }
 
-    // Check if admin owns the form
+
     if (form.adminId.toString() !== adminId) {
       return res.status(403).json({
         success: false,
@@ -165,7 +165,7 @@ export const deleteForm = async (req, res) => {
       });
     }
 
-    // Soft delete
+
     form.isActive = false;
     await form.save();
 

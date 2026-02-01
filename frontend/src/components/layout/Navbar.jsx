@@ -17,7 +17,7 @@ export default function Navbar() {
     try {
       setLoading(true);
       const response = await getAdminData();
-      // Backend returns { success: true, admin: {...} }
+      
       const adminData = response.data?.admin;
       if (adminData) {
         setAdmin({
@@ -27,7 +27,7 @@ export default function Navbar() {
       }
     } catch (error) {
       console.error("Failed to fetch admin data:", error);
-      // Keep default values on error
+     
     } finally {
       setLoading(false);
     }

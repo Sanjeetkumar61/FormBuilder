@@ -21,7 +21,7 @@ export default function AdminLogin() {
       const response = await api.post("/auth/login", { email, password });
 
       if (response.data.success) {
-        // Store token in localStorage
+         
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("adminData", JSON.stringify(response.data.admin));
 

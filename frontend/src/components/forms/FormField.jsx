@@ -4,9 +4,9 @@ export default function FormField({
   field,
   value,
   onChange,
-  mode = "user", // "admin" | "user"
+  mode = "user", 
 }) {
-  // USER MODE (form fill)
+ 
   if (mode === "user") {
     return (
       <div className="space-y-3">
@@ -15,7 +15,7 @@ export default function FormField({
           {field.required && <span className="text-red-500 ml-1">*</span>}
         </label>
 
-        {/* Text Input */}
+       
         {field.type === "text" && (
           <Input
             value={value || ""}
@@ -26,7 +26,7 @@ export default function FormField({
           />
         )}
 
-        {/* Email */}
+        
         {field.type === "email" && (
           <Input
             value={value || ""}
@@ -37,7 +37,7 @@ export default function FormField({
           />
         )}
 
-        {/* Number */}
+        
         {field.type === "number" && (
           <Input
             value={value || ""}
@@ -48,7 +48,7 @@ export default function FormField({
           />
         )}
 
-        {/* Text Area */}
+     
         {field.type === "textarea" && (
           <textarea
             value={value || ""}
@@ -60,7 +60,7 @@ export default function FormField({
           />
         )}
 
-        {/* Single Checkbox */}
+       
         {field.type === "checkbox" && (
           <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">
             <input
@@ -77,7 +77,7 @@ export default function FormField({
           </div>
         )}
 
-        {/* Checkboxes Group */}
+        
         {field.type === "checkbox-group" && (
           <div className="space-y-2.5 p-3 bg-white/40 rounded-lg border border-slate-200">
             {(field.options || []).map((option, idx) => (
@@ -112,7 +112,7 @@ export default function FormField({
           </div>
         )}
 
-        {/* Radio Buttons */}
+        
         {field.type === "radio" && (
           <div className="space-y-2.5 p-3 bg-white/40 rounded-lg border border-slate-200">
             {(field.options || []).map((option, idx) => (
@@ -135,7 +135,7 @@ export default function FormField({
           </div>
         )}
 
-        {/* Dropdown */}
+       
         {field.type === "dropdown" && (
           <select
             value={value || ""}
@@ -152,7 +152,7 @@ export default function FormField({
           </select>
         )}
 
-        {/* File Upload */}
+        
         {field.type === "file" && (
           <div className="space-y-3 p-4 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50/50 hover:bg-blue-100/30 transition-colors">
             <input
@@ -197,7 +197,7 @@ export default function FormField({
     );
   }
 
-  // ADMIN MODE (preview only)
+  
   return (
     <div className="space-y-3 opacity-75 hover:opacity-90 transition-opacity">
       <label className="text-sm font-semibold text-slate-700">
@@ -205,7 +205,7 @@ export default function FormField({
         {field.required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      {/* Text Input Preview */}
+      
       {field.type === "text" && (
         <input
           disabled
@@ -214,7 +214,7 @@ export default function FormField({
         />
       )}
 
-      {/* Email Preview */}
+    
       {field.type === "email" && (
         <input
           type="email"
@@ -224,7 +224,7 @@ export default function FormField({
         />
       )}
 
-      {/* Number Preview */}
+    
       {field.type === "number" && (
         <input
           type="number"
@@ -234,7 +234,7 @@ export default function FormField({
         />
       )}
 
-      {/* Text Area Preview */}
+     
       {field.type === "textarea" && (
         <textarea
           disabled
@@ -244,7 +244,7 @@ export default function FormField({
         />
       )}
 
-      {/* Single Checkbox Preview */}
+   
       {field.type === "checkbox" && (
         <div className="flex items-center gap-2">
           <input type="checkbox" disabled className="h-4 w-4" />
@@ -252,7 +252,7 @@ export default function FormField({
         </div>
       )}
 
-      {/* Checkboxes Group Preview */}
+      
       {field.type === "checkbox-group" && (
         <div className="space-y-2">
           {(field.options || []).map((option, idx) => (
@@ -268,7 +268,7 @@ export default function FormField({
         </div>
       )}
 
-      {/* Radio Buttons Preview */}
+      
       {field.type === "radio" && (
         <div className="space-y-2">
           {(field.options || []).map((option, idx) => (
@@ -280,7 +280,7 @@ export default function FormField({
         </div>
       )}
 
-      {/* Dropdown Preview */}
+      
       {field.type === "dropdown" && (
         <select disabled className="w-full border rounded-lg px-3 py-2 bg-slate-100">
           <option>Select {field.label}</option>
@@ -290,7 +290,7 @@ export default function FormField({
         </select>
       )}
 
-      {/* File Upload Preview */}
+     
       {field.type === "file" && (
         <div className="space-y-2">
           <input

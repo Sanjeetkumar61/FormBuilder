@@ -25,7 +25,7 @@ export default function Dashboard() {
       const formsArray = Array.isArray(formsData) ? formsData : [];
       setForms(formsArray);
       
-      // Load response count for each form
+      
       const counts = {};
       for (const form of formsArray) {
         try {
@@ -59,7 +59,7 @@ export default function Dashboard() {
   };
 
   const handleEdit = (formId) => {
-    // Navigate to edit form page (we'll create this)
+    
     navigate(`/edit-form/${formId}`);
   };
 
@@ -78,7 +78,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Error Display */}
+    
       {error && (
         <div className="mb-6 p-5 bg-red-50 border border-red-300 text-red-700 rounded-xl flex items-center gap-3 shadow-md backdrop-blur-sm">
           <AlertCircle size={20} className="flex-shrink-0" />
@@ -86,7 +86,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Forms Grid */}
+    
       {loading ? (
         <div className="flex items-center justify-center py-16">
           <div className="text-center">
@@ -116,7 +116,7 @@ export default function Dashboard() {
                    {form.title}
                 </h3>
                 
-                {/* Edit and Delete Buttons */}
+              
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(form._id || form.id)}
@@ -150,7 +150,7 @@ export default function Dashboard() {
                 View Responses
               </button>
 
-              {/* Delete Confirmation Modal */}
+        
               {deleteConfirm === (form._id || form.id) && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
                   <div className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-2xl max-w-sm border border-white/50">

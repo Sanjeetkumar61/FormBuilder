@@ -1,7 +1,7 @@
 import Response from "../models/Response.js";
 import Form from "../models/Form.js";
 
-// Submit form response
+
 export const submitResponse = async (req, res) => {
   try {
     const { formId, userId, userName, answers } = req.body;
@@ -15,7 +15,7 @@ export const submitResponse = async (req, res) => {
       });
     }
 
-    // Verify form exists
+
     const form = await Form.findById(formId);
     if (!form) {
       console.log("Form not found with ID:", formId);
@@ -25,14 +25,14 @@ export const submitResponse = async (req, res) => {
       });
     }
 
-    // Process uploaded files
+
     const files = [];
     if (req.files && req.files.length > 0) {
       req.files.forEach((file) => {
-        // Extract fieldId from fieldname (format: fieldId_label)
+
         const parts = file.fieldname.split("_");
         const fieldId = parseInt(parts[0], 10);
-        const fieldLabel = parts.slice(1).join("_"); // In case label has underscores
+        const fieldLabel = parts.slice(1).join("_");
 
         files.push({
           fieldId: isNaN(fieldId) ? 0 : fieldId,
@@ -71,13 +71,13 @@ export const submitResponse = async (req, res) => {
   }
 };
 
-// Get all responses for a form
+
 export const getFormResponses = async (req, res) => {
   try {
     const { formId } = req.params;
     const adminId = req.admin.id;
 
-    // Verify admin owns the form
+
     const form = await Form.findById(formId);
     if (!form) {
       return res.status(404).json({
@@ -109,7 +109,7 @@ export const getFormResponses = async (req, res) => {
   }
 };
 
-// Get response count for a form
+
 export const getResponseCount = async (req, res) => {
   try {
     const { formId } = req.params;
@@ -128,7 +128,7 @@ export const getResponseCount = async (req, res) => {
   }
 };
 
-// Get single response
+
 export const getSingleResponse = async (req, res) => {
   try {
     const { responseId } = req.params;

@@ -35,12 +35,12 @@ export default function FormResponses() {
     }
   };
 
-  // Get field label - now answers are stored with labels as keys
+  
   const getFieldLabel = (fieldKey) => {
-    // If the key is already a label, return it
+    
     if (!form?.fields) return fieldKey;
     
-    // Check if it's a field label
+    
     const field = form.fields.find((f) => f.label === fieldKey);
     return field?.label || fieldKey;
   };
@@ -52,7 +52,7 @@ export default function FormResponses() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="px-6 py-8">
-        {/* Header */}
+        
         <div className="flex items-center gap-4 mb-8">
           <button
             onClick={() => navigate("/")}
@@ -68,7 +68,7 @@ export default function FormResponses() {
           </div>
         </div>
 
-        {/* Error Display */}
+        
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg backdrop-blur-sm shadow-md">
             {error}
@@ -88,7 +88,7 @@ export default function FormResponses() {
               key={response._id || index}
               className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 border border-white/50 cursor-pointer group"
             >
-              {/* Response Header */}
+              
               <button
                 onClick={() => toggleResponse(index)}
                 className="w-full p-6 flex items-center justify-between hover:bg-white/60 transition-colors text-left"
@@ -113,11 +113,11 @@ export default function FormResponses() {
                 </div>
               </button>
 
-              {/* Response Details */}
+             
               {expandedResponse === index && (
                 <div className="border-t px-6 py-6 bg-gradient-to-b from-white to-slate-50 space-y-4">
                   {(() => {
-                    // Parse answers if it's a string
+                   
                     let answersData = response.answers;
                     if (typeof answersData === "string") {
                       try {
@@ -131,12 +131,12 @@ export default function FormResponses() {
                     return answersData && Object.keys(answersData).length > 0 ? (
                       <>
                         {Object.entries(answersData).map(([key, answer], idx) => {
-                          // Skip empty answers and null values
+                          
                           if (answer === null || answer === undefined || answer === "") {
                             return null;
                           }
                           
-                          // Get field label from form fields
+                        
                           const field = form?.fields?.find(f => f.label === key);
                           const displayLabel = field?.label || key;
                           
@@ -154,7 +154,7 @@ export default function FormResponses() {
                           );
                         })}
 
-                        {/* Files Section */}
+                      
                         {response.files && response.files.length > 0 && (
                           <div className="mt-6 pt-6 border-t border-slate-200">
                             <p className="text-sm font-semibold text-slate-700 mb-4">

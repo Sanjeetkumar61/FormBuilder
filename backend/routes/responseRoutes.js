@@ -10,7 +10,7 @@ import { upload } from "../middleware/upload.js";
 
 const router = express.Router();
 
-// Public route with file upload support (multiple files)
+
 router.post("/", upload.any(), submitResponse);
 
 // Protected routes

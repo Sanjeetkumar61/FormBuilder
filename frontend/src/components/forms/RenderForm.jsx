@@ -11,11 +11,11 @@ export default function RenderForm({ fields = [], formId }) {
   const [files, setFiles] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Ensure fields is an array
+  
   const safeFields = Array.isArray(fields) ? fields : [];
 
   const handleChange = (label, value) => {
-    // Handle file input separately
+    
     if (value instanceof File) {
       setFiles({ ...files, [label]: value });
     } else {
@@ -26,7 +26,7 @@ export default function RenderForm({ fields = [], formId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Get the Name field value (should be the first field or find by label)
+    
     const nameField = safeFields.find(f => f.label?.toLowerCase() === "name");
     const userName = nameField ? formData[nameField.label] : "Anonymous";
 
@@ -35,27 +35,27 @@ export default function RenderForm({ fields = [], formId }) {
       return;
     }
 
-    // Generate a simple userId based on timestamp and random number
+    
     const userId = `USER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    // Store answers with field labels
+
     const answers = {};
     safeFields.forEach((field) => {
       answers[field.label] = formData[field.label] || "";
     });
 
-    // Create FormData for multipart submission
+    
     const formDataMultipart = new FormData();
     formDataMultipart.append("formId", formId);
     formDataMultipart.append("userId", userId);
     formDataMultipart.append("userName", userName);
     formDataMultipart.append("answers", JSON.stringify(answers));
 
-    // Add files to FormData with field ID in the name
+    
     Object.entries(files).forEach(([label, file]) => {
       const field = safeFields.find(f => f.label === label);
       const fieldId = field ? field.id : Date.now();
-      // Use fieldId_label format so backend can parse it
+      
       formDataMultipart.append(`${fieldId}_${label}`, file);
     });
 

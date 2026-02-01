@@ -2,9 +2,7 @@ import Admin from "../models/Admin.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-/* =========================
-   ADMIN LOGIN
-========================= */
+
 export const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -45,9 +43,7 @@ export const adminLogin = async (req, res) => {
   }
 };
 
-/* =========================
-   GET ADMIN PROFILE
-========================= */
+
 export const getAdminProfile = async (req, res) => {
   try {
     const admin = await Admin.findById(req.admin.id).select("-password");

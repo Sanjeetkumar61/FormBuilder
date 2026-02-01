@@ -8,7 +8,7 @@ export default function FormBuilder({
   fields,
   setFields,
 }) {
-  // add new field
+ 
   const addField = () => {
     setFields([
       ...fields,
@@ -21,7 +21,7 @@ export default function FormBuilder({
     ]);
   };
 
-  // update field
+  
   const updateField = (id, key, value) => {
     setFields(
       fields.map((field) =>
@@ -30,7 +30,7 @@ export default function FormBuilder({
     );
   };
 
-  // add option to dropdown/radio/checkbox field
+  
   const addOption = (fieldId) => {
     setFields(
       fields.map((field) =>
@@ -44,7 +44,7 @@ export default function FormBuilder({
     );
   };
 
-  // update option
+  
   const updateOption = (fieldId, optionIndex, value) => {
     setFields(
       fields.map((field) =>
@@ -60,7 +60,7 @@ export default function FormBuilder({
     );
   };
 
-  // remove option
+ 
   const removeOption = (fieldId, optionIndex) => {
     setFields(
       fields.map((field) =>
@@ -74,21 +74,21 @@ export default function FormBuilder({
     );
   };
 
-  // remove field
+  
   const removeField = (id) => {
     setFields(fields.filter((field) => field.id !== id));
   };
 
-  // Check if field type needs options
+ 
   const needsOptions = (type) =>
     ["dropdown", "radio", "checkbox-group"].includes(type);
 
-  // Check if field type needs file settings
+  
   const needsFileSettings = (type) => type === "file";
 
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-white/20">
-      {/* Form Title */}
+    
       <div className="mb-8">
         <Input
           label="Form Title"
@@ -99,16 +99,16 @@ export default function FormBuilder({
         />
       </div>
 
-      {/* Fields Section */}
+    
       <div className="space-y-5">
         {fields.map((field, index) => (
           <div
             key={field.id}
             className="border border-slate-200 rounded-xl p-5 bg-gradient-to-br from-slate-50 to-white hover:shadow-md transition-all duration-300 hover:border-slate-300"
           >
-            {/* Field Header */}
+           
             <div className="flex flex-col md:flex-row gap-3 items-start md:items-center mb-4">
-              {/* Field Label */}
+              
               <div className="flex-1 w-full">
                 <Input
                   placeholder={`Field ${index + 1} label`}
@@ -120,7 +120,7 @@ export default function FormBuilder({
                 />
               </div>
 
-              {/* Field Type */}
+              
               <select
                 value={field.type}
                 onChange={(e) =>
@@ -145,7 +145,7 @@ export default function FormBuilder({
                 </optgroup>
               </select>
 
-              {/* Delete */}
+             
               <button
                 onClick={() => removeField(field.id)}
                 className="text-red-500 hover:text-red-700 p-2 rounded-lg hover:bg-red-50 transition-all duration-300 cursor-pointer"
@@ -154,14 +154,14 @@ export default function FormBuilder({
               </button>
             </div>
 
-            {/* File Settings Section */}
+            
             {needsFileSettings(field.type) && (
               <div className="mt-5 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-200 shadow-sm">
                 <label className="text-sm font-semibold text-slate-800 block mb-4">
-                  ⚙️ File Upload Settings
+                  
                 </label>
 
-                {/* Required */}
+                
                 <div className="mb-4">
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
@@ -176,7 +176,7 @@ export default function FormBuilder({
                   </label>
                 </div>
 
-                {/* Max File Size */}
+               
                 <div className="mb-4">
                   <label className="text-sm font-medium text-slate-700 block mb-2">
                     Max File Size (MB)
@@ -196,7 +196,7 @@ export default function FormBuilder({
                   />
                 </div>
 
-                {/* Accepted File Types */}
+                
                 <div>
                   <label className="text-sm font-medium text-slate-700 block mb-3">
                     Accepted File Types
@@ -237,7 +237,7 @@ export default function FormBuilder({
               </div>
             )}
 
-            {/* Options Section (for dropdown, radio, checkbox-group) */}
+            
             {needsOptions(field.type) && (
               <div className="mt-5 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-purple-200 shadow-sm">
                 <label className="text-sm font-semibold text-slate-800 block mb-4">
@@ -279,7 +279,7 @@ export default function FormBuilder({
         ))}
       </div>
 
-      {/* Add Field Button */}
+      
       <div className="mt-8">
         <Button
           variant="secondary"

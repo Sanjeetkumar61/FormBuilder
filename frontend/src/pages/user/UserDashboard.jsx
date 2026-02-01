@@ -30,7 +30,7 @@ export default function UserDashboard() {
 
   return (
     <div className="p-8 space-y-8">
-      {/* Header */}
+      
       <div className="pb-6 border-b-2 border-gradient-to-r from-blue-400 to-purple-400">
         <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-2">
            Available Forms
@@ -40,7 +40,7 @@ export default function UserDashboard() {
         </p>
       </div>
 
-      {/* Error Display */}
+     
       {error && (
         <div className="p-5 bg-red-50 border border-red-300 text-red-700 rounded-xl flex items-center gap-3 shadow-md backdrop-blur-sm">
           <AlertCircle size={20} className="flex-shrink-0" />
@@ -48,7 +48,7 @@ export default function UserDashboard() {
         </div>
       )}
 
-      {/* Forms Grid */}
+    
       {loading ? (
         <div className="flex items-center justify-center py-16">
           <div className="text-center">

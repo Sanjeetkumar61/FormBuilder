@@ -11,14 +11,10 @@ dotenv.config();
 
 const app = express();
 
-/* =========================
-   DATABASE
-========================= */
+
 connectDB();
 
-/* =========================
-   CORS (FINAL – VERCEL + RENDER SAFE)
-========================= */
+
 const allowedOrigins = [
    "https://form-builder-frontend-seven.vercel.app",
    "http://localhost:5173",
@@ -42,35 +38,27 @@ app.use(
    })
 );
 
-// IMPORTANT for preflight
+
 app.options("*", cors());
 
 app.use(express.json());
 
-/* =========================
-   ROOT ROUTE
-========================= */
+
 app.get("/", (req, res) => {
    res.send("API is running...");
 });
 
-/* =========================
-   ROUTES
-========================= */
+
 app.use("/api/auth", authRoutes);
 app.use("/api/forms", formRoutes);
 app.use("/api/responses", responseRoutes);
 
-/* =========================
-   HEALTH CHECK
-========================= */
+
 app.get("/api/health", (req, res) => {
    res.json({ success: true, message: "Server OK" });
 });
 
-/* =========================
-   SERVER
-========================= */
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
    console.log(`Server running on port ${PORT}`);
