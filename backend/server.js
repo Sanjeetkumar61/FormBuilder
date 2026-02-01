@@ -35,7 +35,7 @@ const corsOptions = {
          callback(new Error('Not allowed by CORS'));
       }
    },
-   credentials: true, // ✅ YEH BAHUT IMPORTANT HAI - ISKO HATA MAT DENA
+   credentials: true, // ✅ YEH BAHUT IMPORTANT HAI
    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
    allowedHeaders: ["Content-Type", "Authorization"],
    exposedHeaders: ["Authorization"],
@@ -50,12 +50,10 @@ app.options("*", cors(corsOptions));
 app.use(express.json());
 
 /* =========================
-   REQUEST LOGGING (for debugging - optional)
+   REQUEST LOGGING (for debugging)
 ========================= */
 app.use((req, res, next) => {
    console.log(`${req.method} ${req.path}`);
-   console.log('Origin:', req.headers.origin);
-   console.log('Authorization:', req.headers.authorization ? 'Present' : 'Missing');
    next();
 });
 
@@ -85,9 +83,18 @@ app.use((err, req, res, next) => {
 });
 
 /* =========================
-   SERVER
+   SERVER START
 ========================= */
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-   console.log(`Server running on port ${PORT}`);
-});
+// Check if running on Vercel (serverless)
+const isVercel = process.env.VERCEL === '1';
+
+if (!isVercel) {
+   // Traditional server for Render/local development
+   const PORT = process.env.PORT || 5000;
+   app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+   });
+}
+
+// Export for Vercel serverless
+export default app;
